@@ -5,4 +5,4 @@
 * [x] git init
 * [x] make Dockerfile
 * [x] make docker-compose.yaml
-* [] write docs
+* [ ] write docs
