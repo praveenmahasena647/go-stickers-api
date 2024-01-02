@@ -14,13 +14,9 @@ var (
 
 func Connect() error {
 	var err error
-	var dns = fmt.Sprintf("host=db user=%s password=%s dbname=%s port=5432 sslmode=disable",
-		os.Getenv("DB_USER"),
-		os.Getenv("DB_PASSWORD"),
-		os.Getenv("DB_NAME"),
-	)
-	postgres, err = sql.Open("postgres", dns)
+	postgres, err = sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	if err != nil {
+		fmt.Println(err)
 		return err
 	}
 	return postgres.Ping()

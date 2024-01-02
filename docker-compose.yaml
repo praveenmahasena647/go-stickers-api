@@ -1,22 +1,24 @@
 version: '3.8'
 services:
   server:
+    container_name: 'go_stickers'
     ports:
-      - '42069:42069'
-    container_name: go_server
+      - '6969:42069'
     build:
       tags:
-        - 'go_server:latest'
+        - "go_stickers:latest"
     volumes:
       - .:/usr/src/app
+    environment:
+      DATABASE_URL: "host=db user=postgres password=postgres dbname=postgres sslmode=disable"
     command: go run cmd/main.go
+    depends_on:
+      - db
   db:
     image: postgres:alpine
-    restart: always
     ports:
-      - '5431:5432'
+      - '5422:5423'
     environment:
-    - POSTGRES_USER=
-    - POSTGRES_PASSWORD=password
-    - POSTGRES_DB=
-      ## don't know to do the config above :(
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: stickers
