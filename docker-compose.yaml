@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  server:
+    ports:
+      - '42069:42069'
+    container_name: go_server
+    build:
+      tags:
+        - 'go_server:latest'
+    volumes:
+      - .:/usr/src/app
+    command: go run cmd/main.go
+  db:
+    image: postgres:alpine
+    restart: always
+    ports:
+      - '5431:5432'
+    environment:
+    - POSTGRES_USER=
+    - POSTGRES_PASSWORD=password
+    - POSTGRES_DB=
+      ## don't know to do the config above :(
